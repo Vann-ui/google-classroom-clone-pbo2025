@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassContentController;
 use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\DiscussionController;
 
 // --- Public Routes (Bisa diakses siapa saja) ---
 Route::post('/register', [AuthController::class, 'register']);
@@ -41,6 +42,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Route Guru Memberi Nilai (Grading)
     Route::put('/submissions/{id}/grade', [SubmissionController::class, 'updateGrade']);
+    
+    // --- Route Diskusi ---
+    Route::get('/classrooms/{classroom}/discussions', [DiscussionController::class, 'index']);
+    Route::post('/classrooms/{classroom}/discussions', [DiscussionController::class, 'store']);
   });
 
   // Nanti route Kelas, Materi, Tugas akan ditaruh di sini...
