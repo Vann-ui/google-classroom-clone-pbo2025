@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClassRoomController;
 use App\Http\Controllers\ClassContentController;
 use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\DiscussionController;
