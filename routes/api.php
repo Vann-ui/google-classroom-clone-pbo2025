@@ -10,14 +10,18 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // --- Protected Routes (Harus login / punya Token) ---
 Route::middleware('auth:sanctum')->group(function () {
-    
-    // Logout
-    Route::post('/logout', [AuthController::class, 'logout']);
 
-    // Cek data user yang sedang login (profil)
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
+  // Logout
+  Route::post('/logout', [AuthController::class, 'logout']);
 
-    // Nanti route Kelas, Materi, Tugas akan ditaruh di sini...
+  // Cek data user yang sedang login (profil)
+  Route::get('/user', function (Request $request) {
+    return $request->user();
+
+    // --- API Resource untuk ClassRoom ---
+    // Ini otomatis membuat route index, store, show, update, destroy
+    Route::apiResource('classrooms', \App\Http\Controllers\ClassRoomController::class);
+  });
+
+  // Nanti route Kelas, Materi, Tugas akan ditaruh di sini...
 });
