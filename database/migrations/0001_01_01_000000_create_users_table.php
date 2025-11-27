@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
-    public function up(): void{
+    public function up(): void
+    {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -17,16 +17,14 @@ return new class extends Migration
             $table->timestamps(); // created_at, updated_at
         });
 
-{
-     Schema::create('classrooms', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('teacher_id')->constrained('users')->onDelete('cascade'); // [cite: 102]
-        $table->string('name');
-        $table->string('description')->nullable();
-        $table->string('code')->unique(); // [cite: 105]
-        $table->timestamps();
-     });
-}
+        Schema::create('classrooms', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('teacher_id')->constrained('users')->onDelete('cascade'); // [cite: 102]
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table->string('code')->unique(); // [cite: 105]
+            $table->timestamps();
+        });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
@@ -43,7 +41,6 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
     }
-}
 
     /**
      * Reverse the migrations.
