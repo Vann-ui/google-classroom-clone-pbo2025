@@ -54,7 +54,7 @@ Aplikasi Learning Management System (LMS) sederhana yang dikembangkan untuk meme
 | Nama | NIM |
 |------|-----|
 | Evan Mulya Oktarohmat | H1101241066 |
-| Marcello Chrisdiantoro | - |
+| Marcello Chrisdiantoro | H1101241041 |
 | Nabila Nur Anisa | H1101241013 |
 | Syafira Aulianisa | H1101241025 |
 | Evelyn | H1101241052 |
