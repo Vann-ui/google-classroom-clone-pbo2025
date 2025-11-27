@@ -1,59 +1,70 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📚 Google Classroom Clone
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> 💻 **Tugas Besar Pemrograman Berbasis Objek (PPBO)**
 
-## About Laravel
+Aplikasi Learning Management System (LMS) sederhana yang dikembangkan untuk memenuhi tugas besar mata kuliah PPBO. Sistem ini menghadirkan fitur utama seperti manajemen materi, assignment, submission mahasiswa, diskusi kelas, hingga pemberian nilai dan feedback.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🎯 Fitur-Fitur Utama Sistem
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 👨‍🏫 Fitur Dosen
 
-## Learning Laravel
+- 🔐 **Register & Login** - Pendaftaran dan masuk ke sistem sebagai dosen
+- 💬 **Membuat Diskusi** - Dosen dapat membuat diskusi sebagai sarana pengumuman
+- 📖 **Mengelola Material** - Create, Read, Update, Delete material (file upload & external link)
+- 📝 **Mengelola Assignment** - CRUD lengkap untuk tugas
+- 👀 **Melihat Submission Mahasiswa** - Daftar submission tiap assignment
+- ⭐ **Memberikan Score** - Pemberian nilai untuk setiap submission mahasiswa
+- 💬 **Memberikan Feedback** - Memberikan komentar dan saran kepada mahasiswa
+- 🚪 **Logout** - Keluar dari sistem dengan aman
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 🎓 Fitur Mahasiswa
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- 🔐 **Register & Login** - Pendaftaran dan masuk ke sistem sebagai mahasiswa
+- 🚪 **Join Class** - Bergabung ke dalam kelas yang tersedia
+- 📄 **File Submission** - Upload file (PDF/DOCX/PPT) dengan validasi format otomatis
+- 🔗 **Link Submission** - Kirim link (Google Drive, GitHub, dll)
+- 📚 **Melihat Material** - Akses semua materi yang dibagikan dosen
+- 📝 **Melihat Assignment** - Lihat assignment aktif beserta deadline
+- 🗑️ **Hapus Assignment** - Menghapus assignment yang telah dikumpulkan
+- 🚪 **Logout** - Keluar dari sistem dengan aman
 
-## Laravel Sponsors
+### ⚙️ Fitur Sistem
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- ✅ **Verifikasi Format Dokumen** - Validasi otomatis format file yang diupload
+- 🕒 **Created At** - Pencatatan waktu pembuatan otomatis
+- 🔄 **Updated At** - Pencatatan waktu pembaruan otomatis
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 🧩 Konsep OOP yang Diterapkan
 
-## Contributing
+| Konsep | Implementasi |
+|--------|--------------|
+| 🎭 **Abstraction** | `ClassContent` sebagai abstraksi utama untuk konten kelas |
+| 🧬 **Inheritance** | `Material` dan `Assignment` mewarisi `ClassContent` |
+| 🔄 **Polymorphism** | `Submission` bisa berupa File atau Link |
+| 🔐 **Encapsulation** | Setiap class menggunakan atribut private dan getter/setter |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 👥 Tim Pengembang
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Nama | NIM |
+|------|-----|
+| Evan Mulya Oktarohmat | H1101241066 |
+| Marcello Chrisdiantoro | - |
+| Nabila Nur Anisa | H1101241013 |
+| Syafira Aulianisa | H1101241025 |
+| Evelyn | H1101241052 |
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<div align="center">
 
-## License
+**✨ Dibuat dengan ❤️ untuk Pembelajaran**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+*© 2024 Google Classroom Clone - Proyek PPBO*
+
+</div>
