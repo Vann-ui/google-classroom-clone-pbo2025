@@ -104,4 +104,46 @@ class SubmissionController extends Controller
 
         return response()->json(['data' => $submissions]);
     }
+
+    /**
+     * PUT /submissions/{id}/grade
+     * Dosen memberikan nilai dan feedback pada submission.
+     */
+    public function updateGrade(Request $request, $id)
+    {
+        $user = $request->user();
+
+        // 1. Cek Role Teacher
+        if ($user->role !== 'teacher') {
+            return response()->json(['message' => 'Unauthorized. Only teachers can grade.'], 403);
+        }
+
+        // 2. Cari Submission
+        // Kita gunakan with('assignment') untuk memastikan submission ini valid
+        $submission = Submission::with('assignment')->find($id);
+
+        if (!$submission) {
+            return response()->json(['message' => 'Submission not found'], 404);
+        }
+
+        // (Opsional) Validasi apakah Teacher ini pemilik kelas dari assignment tersebut
+        // Untuk kesederhanaan tugas ini, kita cukup cek role teacher saja dulu.
+
+        // 3. Validasi Input Nilai
+        $request->validate([
+            'grade' => 'required|integer|min:0|max:100', // Nilai 0 - 100
+            'feedback' => 'nullable|string'
+        ]);
+
+        // 4. Update Data
+        $submission->update([
+            'grade' => $request->grade,
+            'feedback' => $request->feedback
+        ]);
+
+        return response()->json([
+            'message' => 'Grading successful',
+            'data' => $submission
+        ]);
+    }
 }

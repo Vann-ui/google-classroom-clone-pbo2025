@@ -38,6 +38,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Route Guru Lihat List Submission di Tugas tertentu
     Route::get('/assignments/{assignment}/submissions', [SubmissionController::class, 'index']);
+
+    // Route Guru Memberi Nilai (Grading)
+    Route::put('/submissions/{id}/grade', [SubmissionController::class, 'updateGrade']);
   });
 
   // Nanti route Kelas, Materi, Tugas akan ditaruh di sini...
