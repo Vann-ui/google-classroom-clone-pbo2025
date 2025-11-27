@@ -35,13 +35,15 @@ return new class extends Migration
         $table->timestamps();
         });
 
-        Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
+        Schema::create('class_contents', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('classroom_id')->constrained()->onDelete('cascade');
+        $table->foreignId('created_by')->constrained('users')->onDelete('cascade'); // [cite: 137]
+        $table->string('title');
+        $table->text('description')->nullable();
+        $table->enum('content_type', ['material', 'assignment']); // Pembeda tipe [cite: 136]
+        $table->timestamps();
+
         });
     }
 
