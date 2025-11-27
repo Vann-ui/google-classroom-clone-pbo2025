@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassContentController;
+use App\Http\Controllers\SubmissionController;
 
 // --- Public Routes (Bisa diakses siapa saja) ---
 Route::post('/register', [AuthController::class, 'register']);
@@ -31,6 +32,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Route untuk melihat detail konten spesifik (tanpa perlu ID kelas)
     Route::get('/contents/{id}', [ClassContentController::class, 'show']);
+
+    // Route Mahasiswa Submit Tugas
+    Route::post('/assignments/{assignment}/submit', [SubmissionController::class, 'store']);
+
+    // Route Guru Lihat List Submission di Tugas tertentu
+    Route::get('/assignments/{assignment}/submissions', [SubmissionController::class, 'index']);
   });
 
   // Nanti route Kelas, Materi, Tugas akan ditaruh di sini...
