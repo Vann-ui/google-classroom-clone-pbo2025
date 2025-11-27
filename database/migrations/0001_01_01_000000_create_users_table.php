@@ -26,10 +26,13 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+        Schema::create('discussions', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('classroom_id')->constrained()->onDelete('cascade');
+        $table->foreignId('teacher_id')->constrained('users')->onDelete('cascade');
+        $table->string('title');
+        $table->text('content'); // Menggunakan text agar lebih panjang
+        $table->timestamps();
         });
 
         Schema::create('sessions', function (Blueprint $table) {
