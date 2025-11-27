@@ -51,5 +51,7 @@ Route::middleware('auth:sanctum')->group(function () {
   // 1. Update & Delete Konten (Materi / Tugas)
     Route::put('/contents/{id}', [ClassContentController::class, 'update']);
     Route::delete('/contents/{id}', [ClassContentController::class, 'destroy']);
+
+    Route::post('/classrooms/join', [ClassRoomController::class, 'join']);
   // Nanti route Kelas, Materi, Tugas akan ditaruh di sini...
 });

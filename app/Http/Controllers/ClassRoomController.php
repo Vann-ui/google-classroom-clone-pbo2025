@@ -134,4 +134,39 @@ class ClassRoomController extends Controller
 
         return response()->json(['message' => 'Classroom deleted successfully']);
     }
+    /* POST /classrooms/join
+     * Mahasiswa gabung kelas pakai Kode Unik.
+     */
+    public function join(Request $request)
+    {
+        $user = $request->user();
+
+        // 1. Hanya student yang boleh join
+        if ($user->role !== 'student') {
+            return response()->json(['message' => 'Only students can join classes'], 403);
+        }
+
+        // 2. Validasi Kode
+        $request->validate([
+            'code' => 'required|string|exists:classrooms,code'
+        ]);
+
+        // 3. Cari Kelas berdasarkan Kode
+        $classroom = ClassRoom::where('code', $request->code)->first();
+
+        // 4. Cek apakah sudah gabung duluan? (Agar tidak duplikat)
+        // Kita pakai relasi 'joinedClasses' yang tadi dibuat di Model User
+        if ($user->joinedClasses()->where('classroom_id', $classroom->id)->exists()) {
+            return response()->json(['message' => 'You already joined this class'], 409);
+        }
+
+        // 5. GABUNGKAN! (Insert ke tabel pivot)
+        $user->joinedClasses()->attach($classroom->id);
+
+        return response()->json([
+            'message' => 'Successfully joined class',
+            'data' => $classroom
+        ]);
+    }
+
 }

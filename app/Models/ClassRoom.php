@@ -26,4 +26,10 @@ class ClassRoom extends Model
   {
     return $this->hasMany(ClassContent::class);
   }
+  // Kelas punya banyak mahasiswa (anggota)
+public function students()
+{
+    return $this->belongsToMany(User::class, 'classroom_user', 'classroom_id', 'user_id')
+                ->where('role', 'student'); // Filter hanya ambil yang student
+}
 }

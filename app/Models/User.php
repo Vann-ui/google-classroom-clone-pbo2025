@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    // Mahasiswa punya banyak kelas yang diikuti
+public function joinedClasses()
+{
+    return $this->belongsToMany(ClassRoom::class, 'classroom_user');
+}
 }
