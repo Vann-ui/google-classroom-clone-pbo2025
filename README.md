@@ -65,6 +65,6 @@ Aplikasi Learning Management System (LMS) sederhana yang dikembangkan untuk meme
 
 **✨ Dibuat dengan ❤️ untuk Pembelajaran**
 
-*© 2024 Google Classroom Clone - Proyek PPBO*
+*© 2025 Google Classroom Clone - Proyek PPBO*
 
 </div>
