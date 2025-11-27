@@ -6,22 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('discussions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+  /**
+   * Run the migrations.
+   */
+  public function up(): void
+  {
+    Schema::create('discussions', function (Blueprint $table) {
+      $table->id();
+      $table->foreignId('classroom_id')->constrained()->onDelete('cascade');
+      $table->foreignId('teacher_id')->constrained('users')->onDelete('cascade');
+      $table->string('title');
+      $table->text('content'); // Menggunakan text agar lebih panjang
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('discussions');
-    }
+  /**
+   * Reverse the migrations.
+   */
+  public function down(): void
+  {
+    Schema::dropIfExists('discussions');
+  }
 };
