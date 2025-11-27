@@ -47,5 +47,9 @@ Route::middleware('auth:sanctum')->group(function () {
   // --- Route Diskusi ---
   Route::get('/classrooms/{classroom}/discussions', [DiscussionController::class, 'index']);
   Route::post('/classrooms/{classroom}/discussions', [DiscussionController::class, 'store']);
+
+  // 1. Update & Delete Konten (Materi / Tugas)
+    Route::put('/contents/{id}', [ClassContentController::class, 'update']);
+    Route::delete('/contents/{id}', [ClassContentController::class, 'destroy']);
   // Nanti route Kelas, Materi, Tugas akan ditaruh di sini...
 });
