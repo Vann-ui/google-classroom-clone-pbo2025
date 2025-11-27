@@ -42,7 +42,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Route Guru Memberi Nilai (Grading)
     Route::put('/submissions/{id}/grade', [SubmissionController::class, 'updateGrade']);
-    
+
     // --- Route Diskusi ---
     Route::get('/classrooms/{classroom}/discussions', [DiscussionController::class, 'index']);
     Route::post('/classrooms/{classroom}/discussions', [DiscussionController::class, 'store']);

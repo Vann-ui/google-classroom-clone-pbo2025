@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Interfaces\ContentDetailInterface;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\ClassContent;
 
 // Menerapkan Interface
 class Material extends Model implements ContentDetailInterface
