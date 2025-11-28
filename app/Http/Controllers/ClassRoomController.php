@@ -12,19 +12,18 @@ class ClassRoomController extends Controller
     /**
      * GET /classrooms
      * Menampilkan daftar kelas.
-     * - Jika Teacher: menampilkan kelas yang dia buat.
-     * - Jika Student: menampilkan semua kelas (atau bisa difilter nanti).
      */
     public function index(Request $request)
     {
         $user = $request->user();
 
         if ($user->role === 'teacher') {
-            // Guru hanya melihat kelas miliknya sendiri
+            // GURU: Hanya melihat kelas yang dia BUAT
             $classrooms = ClassRoom::where('teacher_id', $user->id)->get();
         } else {
-            // Siswa melihat semua kelas yang tersedia (Logic bisa disesuaikan)
-            $classrooms = ClassRoom::with('teacher:id,name')->get();
+            // SISWA: Hanya melihat kelas yang dia JOIN
+            // Menggunakan relasi joinedClasses yang sudah kita buat di Model User
+            $classrooms = $user->joinedClasses()->with('teacher:id,name')->get();
         }
 
         return response()->json([
@@ -41,7 +40,7 @@ class ClassRoomController extends Controller
     {
         $user = $request->user();
 
-        // 1. Cek Otorisasi: Hanya Teacher yang boleh buat kelas
+        // 1. Cek Otorisasi
         if ($user->role !== 'teacher') {
             return response()->json(['message' => 'Unauthorized. Only teachers can create classrooms.'], 403);
         }
@@ -52,12 +51,17 @@ class ClassRoomController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        // 3. Buat Kelas
+        // 3. Generate Kode Unik (Looping untuk memastikan tidak ada duplikat)
+        do {
+            $randomCode = Str::upper(Str::random(6));
+        } while (ClassRoom::where('code', $randomCode)->exists());
+
+        // 4. Buat Kelas
         $classroom = ClassRoom::create([
-            'teacher_id' => $user->id, // Ambil ID dari token login
+            'teacher_id' => $user->id,
             'name' => $request->name,
             'description' => $request->description,
-            'code' => Str::upper(Str::random(6)), // Generate kode unik 6 karakter
+            'code' => $randomCode,
         ]);
 
         return response()->json([
@@ -72,7 +76,6 @@ class ClassRoomController extends Controller
      */
     public function show($id)
     {
-        // Load kelas beserta data gurunya
         $classroom = ClassRoom::with('teacher:id,name')->find($id);
 
         if (!$classroom) {
@@ -95,7 +98,6 @@ class ClassRoomController extends Controller
             return response()->json(['message' => 'Classroom not found'], 404);
         }
 
-        // Cek apakah user ini adalah pemilik kelas tersebut
         if ($user->id !== $classroom->teacher_id) {
             return response()->json(['message' => 'Unauthorized'], 403);
         }
@@ -134,7 +136,9 @@ class ClassRoomController extends Controller
 
         return response()->json(['message' => 'Classroom deleted successfully']);
     }
-    /* POST /classrooms/join
+
+    /**
+     * POST /classrooms/join
      * Mahasiswa gabung kelas pakai Kode Unik.
      */
     public function join(Request $request)
@@ -154,13 +158,12 @@ class ClassRoomController extends Controller
         // 3. Cari Kelas berdasarkan Kode
         $classroom = ClassRoom::where('code', $request->code)->first();
 
-        // 4. Cek apakah sudah gabung duluan? (Agar tidak duplikat)
-        // Kita pakai relasi 'joinedClasses' yang tadi dibuat di Model User
+        // 4. Cek apakah sudah gabung duluan?
         if ($user->joinedClasses()->where('classroom_id', $classroom->id)->exists()) {
             return response()->json(['message' => 'You already joined this class'], 409);
         }
 
-        // 5. GABUNGKAN! (Insert ke tabel pivot)
+        // 5. GABUNGKAN!
         $user->joinedClasses()->attach($classroom->id);
 
         return response()->json([
@@ -168,5 +171,4 @@ class ClassRoomController extends Controller
             'data' => $classroom
         ]);
     }
-
 }
