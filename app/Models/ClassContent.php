@@ -23,7 +23,7 @@ class ClassContent extends Model
      */
     public function material(): HasOne
     {
-        return $this->hasOne(Material::class, 'id');
+        return $this->hasOne(Material::class, 'id', 'id');
     }
 
     /**
@@ -31,7 +31,7 @@ class ClassContent extends Model
      */
     public function assignment(): HasOne
     {
-        return $this->hasOne(Assignment::class, 'id');
+        return $this->hasOne(Assignment::class, 'id', 'id');
     }
 
     /**
